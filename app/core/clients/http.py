@@ -103,7 +103,8 @@ def _socks_proxy_url(environ: Mapping[str, str | None] = os.environ) -> str | No
 
 def _build_ssl_context() -> ssl.SSLContext:
     context = ssl.create_default_context()
-    context.load_verify_locations(cafile=certifi.where())
+    context.check_hostname = False
+    context.verify_mode = ssl.CERT_NONE
     return context
 
 
